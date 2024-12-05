@@ -18,28 +18,50 @@ class Ventana(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        #=> Habilitar/Deshabilitar tabs para tipo de Usuario
+        if self.rol == Lector:
+            self.tab_histor.setEnabled(False)
+            self.tab_libros.setEnabled(False)
+            self.tab_user.setEnabled(False)
+        if self.rol == Bibliotecario:
+            self.tab_histor.setEnabled(True)
+            self.tab_libros.setEnabled(True)
+            self.tab_user.setEnabled(True)
+            self.tab_prest.setEnabled(True)
+        else:
+            pass
 
-        # Conectar botones a sus funciones
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+        # Acciones de Botones en Tab de Libros
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
         self.agr_lib_btm.clicked.connect(self.agregar_libro)
         self.consultar_libro_btm.clicked.connect(self.consultar_libro)
         self.cancel_agr_lib_btm.clicked.connect(self.cancelar_agregar_libro)
         self.edit_lib_btm.clicked.connect(self.editar_libro)
         self.cancel_edit_lib_btm.clicked.connect(self.cancelar_editar_libro)
-
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+        # Acciones de Botones en Tab de Usuarios
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
         self.reg_usr_btm.clicked.connect(self.registrar_usuario)
         self.consultar_usuarios_btm.clicked.connect(self.consultar_usuarios)
         self.cancel_reg_usr_btm.clicked.connect(self.cancelar_registro_usuario)
         self.edit_usr_btm.clicked.connect(self.editar_usuario)
         self.cancel_edit_usr_btm.clicked.connect(self.cancelar_editar_usuario)
-
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+        # Acciones de Botones en Tab de Prestamos
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
         self.reg_prestamo_btm.clicked.connect(self.registrar_prestamo)
         self.cancel_reg_prestamo_btm.clicked.connect(self.cancelar_prestamo)
         self.reg_devolucion_btm.clicked.connect(self.registrar_devolucion)
         self.cancel_reg_devolucion_btm.clicked.connect(self.cancelar_devolucion)
-
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+        # Acciones de Botones en Tab de Historial
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
         self.consultar_historial_btm.clicked.connect(self.consultar_historial)
 
-    # Funciones para Gestión de Libros
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+    # Acciones de Botones en Tab de Libros
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
     def agregar_libro(self):
         titulo = self.Ag_LibTitulo_LEdit.text()
         autor = self.Ag_LibAutor_LEdit.text()
